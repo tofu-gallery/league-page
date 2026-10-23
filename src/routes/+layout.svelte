@@ -1,10 +1,7 @@
 <!-- __layout.svelte -->
 <script>
 	import { Nav, Footer } from "$lib/components"
-    import { dev } from '$app/environment';
-    import { injectAnalytics } from '@vercel/analytics/sveltekit';
- 
-    injectAnalytics({ mode: dev ? 'development' : 'production' });
+    // Tofu gallery: upstream's Vercel Web Analytics (injectAnalytics) is removed so copies carry no tracking. See TOFU.md.
 </script>
 
 <main>
