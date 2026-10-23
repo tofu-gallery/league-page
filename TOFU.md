@@ -69,6 +69,7 @@ Caveats:
 - **Trademarks and artwork.** NFL team logos and player photos come from Sleeper's CDN and belong to their owners. `static/` bundles upstream's own artwork (the League Page logo, awards, banners) and icons of other brands (Sleeper, Discord, WhatsApp, Reddit and the news sites in `static/newsIcons/`), which upstream uses to label contact preferences and news sources; those marks belong to their owners.
 - **Sleeper's terms.** The API is free for non-commercial use; a commercial use of a copy needs Sleeper's agreement.
 - **Template content.** The home page text is upstream's lorem ipsum and the constitution page is upstream's example, including an example LeagueSafe link. Owners edit both in the repository.
+- **Dependencies.** The dependencies are upstream's lockfile, unchanged. On 2026-10-23 GitHub's Dependabot reported 122 known vulnerabilities in it (2 critical, 46 high, 63 moderate, 11 low; development tools included). This fork does not update them, which keeps the lockfile in step with upstream.
 
 ## Verification
 
@@ -88,3 +89,6 @@ VITE_LEAGUE_ID=1201891419585785856 VITE_LEAGUE_NAME="Env Check League" npm run b
 - Browser check in a real browser against 127.0.0.1 only: the home page loaded live Sleeper data for The Legends League ("NFL 2026 Season - Week 7", the 2025 Fantasy Champ, Recent Waiver Moves, Rest of Season Power Rankings for all 12 teams), with 22 images from `sleepercdn.com` and none broken, 205 requests to `api.sleeper.app`, no analytics request, no console errors and no failed requests. `/standings` showed "2026 The Legends League Standings" with all 12 teams, again with no console errors or failed requests.
 - With `VITE_LEAGUE_ID=1201891419585785856` (the same league's 2025 season) and `VITE_LEAGUE_NAME="Env Check League"`, `/standings` showed "2025 Env Check League Standings" and the Sleeper requests started from the configured ID, walking back through its earlier seasons; the demo league's ID was not requested.
 - The preview servers were stopped afterwards.
+- A fresh clone of the pushed `tofu` branch (commit `7aa9de7`) installed with `npm ci` (353 packages) and built with `npm run build` with the same results: no `Dockerfile`, both theme stylesheets generated, `.vercel/output` written, no analytics reference in the client.
+- Tofu's import, simulated on the pushed branch with `python3 -I simulate_import.py --one tofu-gallery/league-page tofu '' no`, keeps 224 files and drops 2, upstream's `src/.DS_Store` and `static/.DS_Store`, which the app does not use; it finds no container file at the root.
+- Size: the branch's `legacy.zip` archive was 3,160,522 bytes before this note was added, and the tree holds 226 files, 4.2 MB unpacked (the importer's limits are 50 MB, 20,000 files and 250 MB).
