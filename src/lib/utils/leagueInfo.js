@@ -1,6 +1,10 @@
 /*   STEP 1   */
-export const leagueID = "your_league_id"; // your league ID
-export const leagueName = "your_league_name"; // your league name
+// Tofu gallery: a copy picks its league from the public build settings VITE_LEAGUE_ID and VITE_LEAGUE_NAME
+// (rebuild after changing them). Without VITE_LEAGUE_ID it shows the league behind upstream's live demo. See TOFU.md.
+const envLeagueID = (import.meta.env.VITE_LEAGUE_ID ?? "").trim();
+const envLeagueName = (import.meta.env.VITE_LEAGUE_NAME ?? "").trim();
+export const leagueID = envLeagueID || "1378763026437529600"; // your league ID
+export const leagueName = envLeagueName || (envLeagueID ? "your_league_name" : "The Legends League"); // your league name
 export const dues = 100; // (optional) used in template constitution page
 export const dynasty = true; // true for dynasty leagues, false for redraft and keeper
 export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VITE_CONTENTFUL_SPACE environment variables
